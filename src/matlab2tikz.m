@@ -890,10 +890,11 @@ function m2t = drawAxes(m2t, handle)
     % before -- if ~isVisible(handle) -- the handle's children are called.
     [m2t, xopts] = getAxisOptions(m2t, handle, 'x');
     [m2t, yopts] = getAxisOptions(m2t, handle, 'y');
+    [m2t, fopts] = getAxisFontProps(m2t, handle); % Call the getAxisFontProps to parse the properties
 
-    m2t.axes{end}.options = opts_merge(m2t.axes{end}.options, xopts, yopts);
-
-    m2t = add3DOptionsOfAxes(m2t, handle);
+    m2t.axes{end}.options = opts_merge(m2t.axes{end}.options, xopts, yopts, fopts);% Add these properties to the main option list
+%  m2t.axes{end}.options = opts_merge(m2t.axes{end}.options, xopts, yopts);    
+m2t = add3DOptionsOfAxes(m2t, handle);
 
     if ~isVisible(handle)
         % Setting hide{x,y} axis also hides the axis labels in Pgfplots whereas
